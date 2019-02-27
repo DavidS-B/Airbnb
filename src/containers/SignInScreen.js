@@ -25,19 +25,15 @@ class SignInScreen extends React.Component {
 
   signInAsync = async () => {
     try {
-      const response = await axios.post(
-        "https://airbnb-api.now.sh/api/user/log_in",
-        {
-          email: this.state.email,
-          password: this.state.password
-        }
-      );
-      console.log(response.data);
+      await axios.post("https://airbnb-api.now.sh/api/user/log_in", {
+        email: this.state.email,
+        password: this.state.password
+      });
       await AsyncStorage.setItem("userToken", "abc");
       this.props.navigation.navigate("App");
     } catch (error) {
       Alert.alert(
-        "                      Error",
+        "Error",
         "You have entered an invalid email or password",
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -56,6 +52,7 @@ class SignInScreen extends React.Component {
           keyboardType="email-address"
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
+          placeholder="exemple@gmail.com"
         />
         <TextInput
           style={styles.passwordInput}
@@ -63,6 +60,7 @@ class SignInScreen extends React.Component {
           secureTextEntry={true}
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
+          placeholder="..........."
         />
         <TouchableOpacity
           style={styles.buttonCenter}
@@ -88,9 +86,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 40,
     textAlign: "center",
-    marginTop: 40
+    marginTop: 30
   },
   emailInput: {
+    marginTop: 30,
     padding: 15,
     height: 60,
     borderBottomColor: "white",
