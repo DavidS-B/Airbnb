@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "react-navigation";
 import HomeScreen from "./HomeScreen";
 import SettingsScreen from "./SettingsScreen";
 import { Ionicons } from "@expo/vector-icons";
+import { Text, View } from "react-native";
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -32,7 +33,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: "tomato",
+      activeTintColor: "#FF5960",
       inactiveTintColor: "gray"
     }
   }
@@ -44,10 +45,40 @@ TabNavigator.navigationOptions = ({ navigation }) => {
 
   switch (routeName) {
     case "Home":
-      headerTitle = "Page d'accueil";
+      headerTitle = (
+        <View
+          style={{ width: "100%", height: "100%", backgroundColor: "#FF5960" }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              paddingTop: "4%",
+              color: "white",
+              fontSize: 20
+            }}
+          >
+            MonAirbnb
+          </Text>
+        </View>
+      );
       break;
     case "Settings":
-      headerTitle = "Paramètres";
+      headerTitle = (
+        <View
+          style={{ width: "100%", height: "100%", backgroundColor: "#FF5960" }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              paddingTop: "4%",
+              color: "white",
+              fontSize: 20
+            }}
+          >
+            Paramètres
+          </Text>
+        </View>
+      );
       break;
     default:
       headerTitle = routeName;
