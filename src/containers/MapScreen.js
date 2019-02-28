@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Text, View, ProgressBarAndroid } from "react-native";
-import { Constants, Location, Permissions, MapView } from "expo";
+import { View, ProgressBarAndroid } from "react-native";
+import { Location, Permissions, MapView } from "expo";
 
 export class MapScreen extends Component {
   state = {
@@ -48,8 +48,8 @@ export class MapScreen extends Component {
           initialRegion={{
             latitude: this.state.location.coords.latitude,
             longitude: this.state.location.coords.longitude,
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
           }}
         >
           {this.state.tab.rooms.map((i, index) => {

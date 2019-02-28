@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
-import { MapView, Location, Permissions } from "expo";
+import { MapView } from "expo";
 import axios from "axios";
 
 class OtherScreen extends React.Component {
@@ -20,10 +20,17 @@ class OtherScreen extends React.Component {
       headerLeft: null,
       headerTitle: (
         <View
-          style={{ backgroundColor: "#FF5960", flex: 1, flexDirection: "row" }}
+          style={{
+            backgroundColor: "#FF5960",
+            width: "100%",
+            height: "100%",
+            flexDirection: "row",
+            marginBottom: 23,
+            justifyContent: "space-between"
+          }}
         >
           <TouchableOpacity
-            style={{ paddingLeft: "4%", width: 50, height: 40 }}
+            style={{ paddingLeft: "5%", width: 50, height: 30 }}
             onPress={() => {
               navigation.navigate("Home");
             }}
@@ -35,12 +42,13 @@ class OtherScreen extends React.Component {
             style={{
               color: "white",
               fontSize: 20,
-              paddingBottom: "4%",
-              paddingLeft: "28%"
+              fontWeight: "bold",
+              paddingRight: 60
             }}
           >
             Room
           </Text>
+          <View />
         </View>
       ),
       headerStyle: {
@@ -56,6 +64,7 @@ class OtherScreen extends React.Component {
     tab: [],
     isLoading: true,
     nbLines: 3,
+    nbLinesTitle: 1,
     location: null
   };
 
@@ -65,20 +74,10 @@ class OtherScreen extends React.Component {
         this.props.navigation.state.params.id
     );
     this.setState({
-      tab: response.data
-    });
-    await this.getLocationAsync();
-    console.log(this.state.location);
-  }
-
-  getLocationAsync = async () => {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    const location = await Location.getCurrentPositionAsync({});
-    this.setState({
-      location: location,
+      tab: response.data,
       isLoading: false
     });
-  };
+  }
 
   renderOffer = () => {
     if (this.state.isLoading === true) {
@@ -120,20 +119,22 @@ class OtherScreen extends React.Component {
                       marginBottom: 10
                     }}
                   >
-                    <Text
-                      style={{
-                        backgroundColor: "black",
-                        color: "white",
-                        width: 100,
-                        height: 50,
-                        textAlign: "center",
-                        lineHeight: 50,
-                        marginTop: 190,
-                        fontSize: 20
-                      }}
-                    >
-                      {this.state.tab.price} €
-                    </Text>
+                    {index % 5 == 0 ? (
+                      <Text
+                        style={{
+                          backgroundColor: "black",
+                          color: "white",
+                          width: 100,
+                          height: 50,
+                          textAlign: "center",
+                          lineHeight: 50,
+                          marginTop: 190,
+                          fontSize: 20
+                        }}
+                      >
+                        {this.state.tab.price} €
+                      </Text>
+                    ) : null}
                   </ImageBackground>
                 </View>
               );
@@ -152,7 +153,12 @@ class OtherScreen extends React.Component {
                     paddingTop: 20,
                     paddingRight: 10
                   }}
-                  numberOfLines={1}
+                  onPress={() =>
+                    this.state.nbLinesTitle === 1
+                      ? this.setState({ nbLinesTitle: null })
+                      : this.setState({ nbLinesTitle: 1 })
+                  }
+                  numberOfLines={this.state.nbLinesTitle}
                   ellipsizeMode={"tail"}
                 >
                   {this.state.tab.title}

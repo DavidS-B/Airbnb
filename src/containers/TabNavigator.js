@@ -60,7 +60,8 @@ TabNavigator.navigationOptions = ({ navigation }) => {
               textAlign: "center",
               paddingTop: "4%",
               color: "white",
-              fontSize: 20
+              fontSize: 20,
+              fontWeight: "bold"
             }}
           >
             MonAirbnb
@@ -78,7 +79,8 @@ TabNavigator.navigationOptions = ({ navigation }) => {
               textAlign: "center",
               paddingTop: "4%",
               color: "white",
-              fontSize: 20
+              fontSize: 20,
+              fontWeight: "bold"
             }}
           >
             Paramètres
@@ -96,7 +98,8 @@ TabNavigator.navigationOptions = ({ navigation }) => {
               textAlign: "center",
               paddingTop: "4%",
               color: "white",
-              fontSize: 20
+              fontSize: 20,
+              fontWeight: "bold"
             }}
           >
             Map
