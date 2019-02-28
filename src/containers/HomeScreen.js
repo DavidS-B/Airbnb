@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  // Button,
   View,
   FlatList,
   Text,
@@ -8,7 +7,8 @@ import {
   ProgressBarAndroid,
   Image,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity
 } from "react-native";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
@@ -64,7 +64,12 @@ class HomeScreen extends React.Component {
                 keyExtractor={item => String(item.id)}
                 key={i._id}
                 renderItem={({ item }) => (
-                  <View style={{ textAlign: "center" }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.props.navigation.navigate("Other", { id: i._id });
+                    }}
+                    style={{ textAlign: "center" }}
+                  >
                     <ImageBackground
                       source={{ uri: i.photos[0] }}
                       style={{
@@ -152,7 +157,7 @@ class HomeScreen extends React.Component {
                         backgroundColor: "#D8D8D8"
                       }}
                     />
-                  </View>
+                  </TouchableOpacity>
                 )}
               />
             );
@@ -161,10 +166,6 @@ class HomeScreen extends React.Component {
       );
     }
   }
-
-  showMoreApp = () => {
-    this.props.navigation.navigate("Other");
-  };
 }
 
 const styles = StyleSheet.create({

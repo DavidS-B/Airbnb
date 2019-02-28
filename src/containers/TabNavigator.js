@@ -2,12 +2,14 @@ import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import HomeScreen from "./HomeScreen";
 import SettingsScreen from "./SettingsScreen";
+import MapScreen from "./MapScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeScreen,
+    Map: MapScreen,
     Settings: SettingsScreen
   },
   {
@@ -23,6 +25,10 @@ const TabNavigator = createBottomTabNavigator(
             break;
           case "Settings":
             iconName = "ios-settings";
+
+            break;
+          case "Map":
+            iconName = "ios-map";
 
             break;
           default:
@@ -76,6 +82,24 @@ TabNavigator.navigationOptions = ({ navigation }) => {
             }}
           >
             Paramètres
+          </Text>
+        </View>
+      );
+      break;
+    case "Map":
+      headerTitle = (
+        <View
+          style={{ width: "100%", height: "100%", backgroundColor: "#FF5960" }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              paddingTop: "4%",
+              color: "white",
+              fontSize: 20
+            }}
+          >
+            Map
           </Text>
         </View>
       );
